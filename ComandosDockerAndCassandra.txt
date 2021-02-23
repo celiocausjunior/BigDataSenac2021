@@ -1,0 +1,35 @@
+** acessar o container -> docker exec -it <idcontainer> bash
+** copiar para container-> $ docker cp covid19_formated_utf.csv mycassandra:/home
+** acessar o cassandeaa -> cqlsh
+
+
+docker run --name cas1 -p 9042:9042 -v database/data/node1:/var/lib/cassandra/data -e CASSANDRA_CLUSTER_NAME=MyCluster -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=datacenter1 -d cassandra
+
+docker run --name cas2 -v /database/data/node2:/var/lib/cassandra/data -e CASSANDRA_SEEDS="$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' cas1)" -e CASSANDRA_CLUSTER_NAME=MyCluster -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=datacenter1 -d cassandra:latest
+
+CREATE KEYSPACE senac WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 2};
+describe keyspaces;
+use senac;
+
+
+CREATE TABLE covidCidades(
+   id int PRIMARY KEY,
+   regiao text,
+   estado text,
+   municipio text,
+   coduf text,
+   codmun text,
+   data date,
+   casosAcumulado varint,
+   casosNovos varint,
+   obitosAcumulado varint
+   );
+   
+   
+
+
+
+COPY senac.covidCidades (id,regiao,estado,municipio,coduf,codmun,data,casosAcumulado,casosNovos,obitosAcumulado) FROM 'covid19_formated_utf.csv' WITH DELIMITER=';' AND HEADER=TRUE;
+
+
+senac> SELECT data, casosacumulado FROM covidCidades WHERE municipio='Laranjal' ALLOW FILTERING;

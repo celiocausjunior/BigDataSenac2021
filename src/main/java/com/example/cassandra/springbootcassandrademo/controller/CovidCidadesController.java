@@ -25,30 +25,27 @@ public class CovidCidadesController {
     CovidCidadesRepository covidCidadesRepository;
 
     @PostMapping("/covid19")
-    public CovidCidades addProduct(@RequestBody CovidCidades product){
-        covidCidadesRepository.save(product);
-        return product;
+    public CovidCidades covidCidades(@RequestBody CovidCidades covidCidades){
+        covidCidadesRepository.save(covidCidades);
+        return covidCidades;
 
     }
 
     @GetMapping("/covid19/{id}")
     public ResponseEntity<CovidCidades> findById(@PathVariable("id") Integer productId){
         CovidCidades covidCidades=covidCidadesRepository.findById(productId).orElseThrow(
-                () -> new ResouceNotFoundException("Product not found" + productId));
+                () -> new ResouceNotFoundException("Entity not found" + productId));
         return ResponseEntity.ok().body(covidCidades);
     }
 
 
-
     @GetMapping("/covid19")
-    public List<CovidCidades> getProducts(){
+    public List<CovidCidades> getAll(){
 
         return covidCidadesRepository.findAll();
     }
 
-   
-
-
+ 
     @DeleteMapping("covid19/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer productId) {
         CovidCidades covidCidades = covidCidadesRepository.findById(productId).orElseThrow(
