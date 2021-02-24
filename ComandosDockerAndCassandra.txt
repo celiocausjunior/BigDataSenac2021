@@ -33,3 +33,6 @@ COPY senac.covidCidades (id,regiao,estado,municipio,coduf,codmun,data,casosAcumu
 
 
 senac> SELECT data, casosacumulado FROM covidCidades WHERE municipio='Laranjal' ALLOW FILTERING;
+
+
+SELECT * FROM covidCidades WHERE id=20212021 ALLOW FILTERING;
