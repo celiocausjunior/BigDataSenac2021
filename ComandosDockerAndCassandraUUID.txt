@@ -1,0 +1,39 @@
+** acessar o container -> docker exec -it <idcontainer> bash /// (windows) -> winpty docker exec -it <idcontainer>
+** copiar para container-> $ docker cp covid19_uuid.csv mycassandra:/home
+** acessar o cassandra -> cqlsh
+
+
+
+
+CREATE KEYSPACE senac WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 2};
+
+
+describe keyspaces;
+
+use senac;
+
+CREATE TABLE covidCidades(
+ regiao text,
+   estado text,
+   municipio text,
+   coduf text,
+   codmun text,
+   data date,
+   casosAcumulado varint,
+   casosNovos varint,
+   obitosAcumulado varint,
+   id uuid PRIMARY KEY
+   );
+
+   
+   
+
+
+
+COPY senac.covidCidades (regiao,estado,municipio,coduf,codmun,data,casosAcumulado,casosNovos,obitosAcumulado,id) FROM 'export.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+
+senac> SELECT data, casosacumulado FROM covidCidades WHERE municipio='Laranjal' ALLOW FILTERING;
+
+
+SELECT * FROM covidCidades WHERE id=20212021 ALLOW FILTERING;
