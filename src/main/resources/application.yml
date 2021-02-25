@@ -4,3 +4,5 @@ spring:
       port: 9042
       contact-points: mycassandra
       keyspace-name: senac
+      request:
+        timeout: 20s

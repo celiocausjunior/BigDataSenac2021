@@ -1,6 +1,8 @@
 package com.example.cassandra.springbootcassandrademo.model;
 
 
+import java.util.UUID;
+
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class CovidCidades {
 
     @PrimaryKey
-    private int id;
+    private UUID id = UUID.randomUUID();
     
     private String regiao;
     private String estado;
@@ -26,10 +28,10 @@ public class CovidCidades {
     private Integer casosNovos;
     private Integer obitosAcumulado;
     
-	public int getId() {
+	public UUID getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 	public String getRegiao() {

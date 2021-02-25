@@ -2,6 +2,7 @@ package com.example.cassandra.springbootcassandrademo.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +33,17 @@ public class CovidCidadesController {
     }
 
     @GetMapping("/covid19/{id}")
-    public ResponseEntity<CovidCidades> findById(@PathVariable("id") Integer productId){
-        CovidCidades covidCidades=covidCidadesRepository.findById(productId).orElseThrow(
-                () -> new ResouceNotFoundException("Entity not found" + productId));
+    public ResponseEntity<CovidCidades> findById(@PathVariable("id") Integer covidCidadesId){
+        CovidCidades covidCidades=covidCidadesRepository.findById(covidCidadesId).orElseThrow(
+                () -> new ResouceNotFoundException("Entity not found" + covidCidadesId));
         return ResponseEntity.ok().body(covidCidades);
+    }
+    
+    
+    @GetMapping("/covid19/estado/{estado}")
+    public ResponseEntity<List<CovidCidades>> findByEstado(@PathVariable("estado") String estadoUf){
+        List <CovidCidades> covidEstado=covidCidadesRepository.findByEstado(estadoUf);
+        return ResponseEntity.ok().body(covidEstado);
     }
 
 
@@ -47,9 +55,9 @@ public class CovidCidadesController {
 
  
     @DeleteMapping("covid19/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer productId) {
-        CovidCidades covidCidades = covidCidadesRepository.findById(productId).orElseThrow(
-                () -> new ResouceNotFoundException("Product not found::: " + productId));
+    public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer covidCidadesId) {
+        CovidCidades covidCidades = covidCidadesRepository.findById(covidCidadesId).orElseThrow(
+                () -> new ResouceNotFoundException("Entity not found::: " + covidCidadesId));
         covidCidadesRepository.delete(covidCidades);
         return ResponseEntity.ok().build();
     }
