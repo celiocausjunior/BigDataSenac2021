@@ -1,5 +1,5 @@
 ** acessar o container -> docker exec -it <idcontainer> bash /// (windows) -> winpty docker exec -it <idcontainer>
-** copiar para container-> $ docker cp covid19_uuid.csv mycassandra:/home
+** copiar para container-> $ docker cp export.csv mycassandra:/home
 ** acessar o cassandra -> cqlsh
 
 
@@ -30,7 +30,7 @@ CREATE TABLE covidCidades(
 
 
 
-COPY senac.covidCidades (regiao,estado,municipio,coduf,codmun,data,casosAcumulado,casosNovos,obitosAcumulado,id) FROM 'export.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+COPY senac.covidCidades (regiao,estado,municipio,coduf,codmun,data,casosAcumulado,casosNovos,obitosAcumulado,id) FROM '/home/export.csv' WITH DELIMITER=',' AND HEADER=TRUE;
 
 
 senac> SELECT data, casosacumulado FROM covidCidades WHERE municipio='Laranjal' ALLOW FILTERING;

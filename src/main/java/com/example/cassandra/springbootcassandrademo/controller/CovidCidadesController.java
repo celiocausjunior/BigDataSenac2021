@@ -2,7 +2,7 @@ package com.example.cassandra.springbootcassandrademo.controller;
 
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public class CovidCidadesController {
     }
 
     @GetMapping("/covid19/{id}")
-    public ResponseEntity<CovidCidades> findById(@PathVariable("id") Integer covidCidadesId){
+    public ResponseEntity<CovidCidades> findById(@PathVariable("id") UUID covidCidadesId){
         CovidCidades covidCidades=covidCidadesRepository.findById(covidCidadesId).orElseThrow(
                 () -> new ResouceNotFoundException("Entity not found" + covidCidadesId));
         return ResponseEntity.ok().body(covidCidades);
@@ -55,7 +55,7 @@ public class CovidCidadesController {
 
  
     @DeleteMapping("covid19/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer covidCidadesId) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") UUID covidCidadesId) {
         CovidCidades covidCidades = covidCidadesRepository.findById(covidCidadesId).orElseThrow(
                 () -> new ResouceNotFoundException("Entity not found::: " + covidCidadesId));
         covidCidadesRepository.delete(covidCidades);
