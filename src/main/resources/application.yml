@@ -5,4 +5,4 @@ spring:
       contact-points: mycassandra
       keyspace-name: senac
       request:
-        timeout: 20s
+        timeout: 40s

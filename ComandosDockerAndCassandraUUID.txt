@@ -18,7 +18,7 @@ CREATE TABLE covidCidades(
    municipio text,
    coduf text,
    codmun text,
-   data date,
+   data timestamp,
    casosAcumulado varint,
    casosNovos varint,
    obitosAcumulado varint,

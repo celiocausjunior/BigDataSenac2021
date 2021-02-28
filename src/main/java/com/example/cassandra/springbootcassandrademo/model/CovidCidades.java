@@ -2,7 +2,7 @@ package com.example.cassandra.springbootcassandrademo.model;
 
 
 import java.util.UUID;
-
+import java.util.Date;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
@@ -24,6 +24,7 @@ public class CovidCidades {
     private String municipio;
     private String coduf;
     private String codmun;
+    private Date data;
     private Integer casosAcumulado;
     private Integer casosNovos;
     private Integer obitosAcumulado;
@@ -82,6 +83,12 @@ public class CovidCidades {
 	}
 	public void setObitosAcumulado(Integer obitosAcumulado) {
 		this.obitosAcumulado = obitosAcumulado;
+	}
+	public Date getData() {
+		return data;
+	}
+	public void setData(Date data) {
+		this.data = data;
 	}
 
     
