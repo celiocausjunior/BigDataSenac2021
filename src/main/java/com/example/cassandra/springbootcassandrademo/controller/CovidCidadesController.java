@@ -1,6 +1,7 @@
 package com.example.cassandra.springbootcassandrademo.controller;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +27,9 @@ public class CovidCidadesController {
     CovidCidadesRepository covidCidadesRepository;
 
     @PostMapping("/covid19")
-    public CovidCidades covidCidades(@RequestBody CovidCidades covidCidades){
+    public CovidCidades covidCidades(@RequestBody CovidCidades covidCidades, Date data){
+    	data = new Date();
+    	covidCidades.setData(data);
         covidCidadesRepository.save(covidCidades);
         return covidCidades;
 

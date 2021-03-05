@@ -6,14 +6,10 @@ import java.util.Date;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Table
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CovidCidades {
 
     @PrimaryKey
@@ -29,6 +25,23 @@ public class CovidCidades {
     private Integer casosNovos;
     private Integer obitosAcumulado;
     
+    
+    public CovidCidades() {}
+    
+    
+	public CovidCidades(UUID id, String regiao, String estado, String municipio, String coduf, String codmun, Date data,
+			Integer casosAcumulado, Integer casosNovos, Integer obitosAcumulado) {
+		this.id = id;
+		this.regiao = regiao;
+		this.estado = estado;
+		this.municipio = municipio;
+		this.coduf = coduf;
+		this.codmun = codmun;
+		this.data = data;
+		this.casosAcumulado = casosAcumulado;
+		this.casosNovos = casosNovos;
+		this.obitosAcumulado = obitosAcumulado;
+	}
 	public UUID getId() {
 		return id;
 	}
